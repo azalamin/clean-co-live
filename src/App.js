@@ -1,14 +1,15 @@
 import AOS from "aos";
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { publicRoutes } from "./routes/publicRoutes";
- 
+
 function App() {
-  useEffect( () => {
+  useEffect(() => {
     AOS.init();
-  },[])
+  }, []);
+
   return (
     <Navbar>
       <Routes>

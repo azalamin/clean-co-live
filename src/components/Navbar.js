@@ -1,32 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Navbar = ({ children }) => {
+  const [theme, setTheme] = useState(false);
+  
+  const handleChangeTheme = (event) => {
+    setTheme(event.target.checked);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      theme ? "dark" : "light"
+    );
+  }, [theme]);
+
   return (
-    <div class="drawer drawer-end">
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
-        <div class="w-full navbar bg-base-100 lg:px-10 fixed top-0 z-50 ">
-          <div class="flex-1 px-2 mx-2">Clean Co.</div>
-          <div class="flex-none lg:hidden">
-            <label for="my-drawer-3" class="btn btn-square btn-ghost">
+    <div className="drawer drawer-end">
+      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
+        <div className="w-full navbar bg-base-100 lg:px-10 fixed top-0 z-50 ">
+          <div className="flex-1 px-2 mx-2">Clean Co.</div>
+          <div className="flex-none lg:hidden">
+            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="inline-block w-6 h-6 stroke-current"
+                className="inline-block w-6 h-6 stroke-current"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
               </svg>
             </label>
           </div>
-          <div class="flex-none hidden lg:block">
-            <ul class="menu menu-horizontal gap-x-2">
+          <div className="flex-none hidden lg:block">
+            <ul className="menu menu-horizontal gap-x-2">
               <li>
                 <NavLink to="/" className="rounded-lg">
                   Home
@@ -54,38 +67,42 @@ const Navbar = ({ children }) => {
               </li>
               <li className="dropdown dropdown-hover dropdown-end ">
                 <label
-                  tabindex="0"
-                  class="btn btn-outline btn-primary rounded-lg"
+                  tabIndex="0"
+                  className="btn btn-outline btn-primary rounded-lg"
                 >
                   Book Now
                 </label>
                 <ul
-                  tabindex="0"
-                  class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  tabIndex="0"
+                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <a>Item 1</a>
+                    <a href="#link">Item 1</a>
                   </li>
                   <li>
-                    <a>Item 2</a>
+                    <a href="#link">Item 2</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <label
-                  class="swap swap-rotate rounded-full"
+                  className="swap swap-rotate rounded-full"
                   data-act-class="ACTIVECLASS"
                 >
-                  <input data-toggle-theme="dark,light" type="checkbox" />
+                  <input
+                    onChange={(event) => handleChangeTheme(event)}
+                    name="theme"
+                    type="checkbox"
+                  />
                   <svg
-                    class="swap-on fill-current w-8 h-8"
+                    className="swap-on fill-current w-8 h-8"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
                     <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
                   </svg>
                   <svg
-                    class="swap-off fill-current w-8 h-8"
+                    className="swap-off fill-current w-8 h-8"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
@@ -98,9 +115,9 @@ const Navbar = ({ children }) => {
         </div>
         {children}
       </div>
-      <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 gap-y-2">
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 gap-y-2">
           <li>
             <NavLink to="/" className="rounded-lg">
               Home
