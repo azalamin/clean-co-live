@@ -3,15 +3,20 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = ({ children }) => {
   const [theme, setTheme] = useState(false);
-  
+
   const handleChangeTheme = (event) => {
     setTheme(event.target.checked);
+    if (event.target.checked) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
   };
 
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
-      theme ? "dark" : "light"
+      localStorage.getItem("theme")
     );
   }, [theme]);
 
