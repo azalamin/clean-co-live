@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Navbar = ({ children }) => {
   const [theme, setTheme] = useState(false);
+  const [admin] = useAdmin();
+  const { pathname } = useLocation();
 
   const handleChangeTheme = (event) => {
     setTheme(event.target.checked);
@@ -25,6 +28,24 @@ const Navbar = ({ children }) => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="w-full navbar bg-base-100 lg:px-10 fixed top-0 z-50 ">
+          {pathname.includes("dashboard") && (
+            <label htmlFor="dashboard-drawer" className="btn drawer-button lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </label>
+          )}
           <div className="flex-1 px-2 mx-2">Clean Co.</div>
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -50,6 +71,13 @@ const Navbar = ({ children }) => {
                   Home
                 </NavLink>
               </li>
+              {admin && (
+                <li>
+                  <NavLink to="/dashboard/add-admin" className="rounded-lg">
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
               <li>
                 <NavLink to="/about" className="rounded-lg">
                   About
@@ -128,6 +156,13 @@ const Navbar = ({ children }) => {
               Home
             </NavLink>
           </li>
+          {admin && (
+            <li>
+              <NavLink to="/dashboard" className="rounded-lg">
+                Dashboard
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/about" className="rounded-lg">
               About
@@ -176,10 +211,10 @@ const Navbar = ({ children }) => {
           </li>
           <div
             tabIndex="0"
-            class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+            className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
           >
-            <div class="collapse-title text-xl font-medium">Book now</div>
-            <div class="collapse-content">
+            <div className="collapse-title text-xl font-medium">Book now</div>
+            <div className="collapse-content">
               <li>
                 <NavLink to="/contact" className="rounded-lg">
                   Quick b ook
